@@ -1,0 +1,13 @@
+===============
+2026-03-15
+
+RectYX2D 1.0.1 version
+
+- Object.java : remove "customsTypesBlocks" static array and add "isBlock" boolean instead
+- Engine.java : rename private Thread attributes by simplest and clearly names
+- Update README.md
+
+===============
+2026-03-01
+
+RectYX2D 1.0 version

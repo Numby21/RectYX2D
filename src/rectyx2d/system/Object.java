@@ -30,8 +30,6 @@ public class Object {
 	// region Properties
 	//====================
 	
-	static int[] customsTypesBlocks = new int[]{};
-
 	protected int id;
 	protected String name;
 
@@ -45,6 +43,8 @@ public class Object {
 	protected boolean isCalcEnterIntoCenterScreen = false;
 	protected boolean isCalcCollisionSelf = false;
 	protected boolean isCalcCollisionFromOthers = false;
+	
+	protected boolean isBlock = false;
 	
 	//====================
 	// end region Properties
@@ -79,7 +79,8 @@ public class Object {
 		boolean isCalcEnterIntoScreen,
 		boolean isCalcEnterIntoCenterScreen,
 		boolean isCalcCollisionSelf,
-		boolean isCalcCollisionFromOthers
+		boolean isCalcCollisionFromOthers,
+		boolean isBlock
 	) {
 		this(id, name, customType, coordinates, buildDirection);
 		this.isCalcPrimary = isCalcPrimary;
@@ -88,26 +89,11 @@ public class Object {
 		this.isCalcEnterIntoCenterScreen = isCalcEnterIntoCenterScreen;
 		this.isCalcCollisionSelf = isCalcCollisionSelf;
 		this.isCalcCollisionFromOthers = isCalcCollisionFromOthers;
+		this.isBlock = isBlock;
 	}
 	
 	//====================
 	// end region Constructors
-	//====================
-	
-	//====================
-	// region Getters & Setters statics
-	//====================
-
-	public static int[] getCustomsTypesBlocks() {
-		return customsTypesBlocks;
-	}
-
-	public static void setCustomsTypesBlocks(int[] customsTypesBlocks) {
-		Object.customsTypesBlocks = customsTypesBlocks;
-	}
-	
-	//====================
-	// end region Getters & Setters statics
 	//====================
 	
 	//====================
@@ -204,6 +190,14 @@ public class Object {
 
 	public void setIsCalcCollisionFromOthers(boolean isCalcCollisionFromOthers) {
 		this.isCalcCollisionFromOthers = isCalcCollisionFromOthers;
+	}
+
+	public boolean getIsBlock() {
+		return isBlock;
+	}
+
+	public void setIsBlock(boolean isBlock) {
+		this.isBlock = isBlock;
 	}
 	
 	//====================

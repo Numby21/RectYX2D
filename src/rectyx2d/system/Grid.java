@@ -53,6 +53,7 @@ public class Grid extends ObjectMovable {
 			true,
 			false,
 			true,
+			false,
 			false
 		);
 		this.objectsMovables = objectsMovables;

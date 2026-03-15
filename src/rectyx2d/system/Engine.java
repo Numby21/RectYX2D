@@ -84,13 +84,13 @@ public abstract class Engine {
 	/**
 	 * Priority thread, calculate the engine arrays of {@code Object} and {@code ObjectMovable} inside the {@code CALC_DIMENSIONS}.
 	 */
-	private Thread threadEngine = null;
+	private Thread threadCalc = null;
 	
 	/**
 	 * Secondary thread, calculate if the engine arrays of {@code Object} and {@code ObjectMovable} are inside or outside the {@code CALC_DIMENSIONS}.
 	 * Also do secondary engine calculations of array of {@code ObjectMovable} that are outside of the {@code CALC_DIMENSIONS}.
 	 */
-	private Thread threadObjectsToCalc = null;
+	private Thread threadCalcSecondary = null;
 
 	private final java.lang.Object LOCK_OBJECTS_TO_CALC = new java.lang.Object();
 	private final java.lang.Object LOCK_RUNNABLES = new java.lang.Object();
@@ -307,7 +307,7 @@ public abstract class Engine {
 		
 		this.startReady();
 
-		this.threadEngine = new Thread(new Runnable() {
+		this.threadCalc = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (isEqualsBooleans(Engine.this.isStarted, true)) {
@@ -315,11 +315,11 @@ public abstract class Engine {
 				}
 			}
 		});
-		this.threadEngine.setDaemon(false);
-		this.threadEngine.setPriority(9);
-		this.threadEngine.start();
+		this.threadCalc.setDaemon(false);
+		this.threadCalc.setPriority(9);
+		this.threadCalc.start();
 
-		this.threadObjectsToCalc = new Thread(new Runnable() {
+		this.threadCalcSecondary = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				long objectsToCalcLastTime = 0;
@@ -341,17 +341,17 @@ public abstract class Engine {
 				}
 			}
 		});
-		this.threadObjectsToCalc.setDaemon(false);
-		this.threadObjectsToCalc.setPriority(1);
-		this.threadObjectsToCalc.start();
+		this.threadCalcSecondary.setDaemon(false);
+		this.threadCalcSecondary.setPriority(1);
+		this.threadCalcSecondary.start();
 	}
 	
 	/**
 	 * Indicate if the engine is started.
 	 */
 	public boolean isStarted() {
-		return isNotEquals(this.threadEngine, null) && isEqualsBooleans(this.threadEngine.isAlive(), true)
-		&& isNotEquals(this.threadObjectsToCalc, null) && isEqualsBooleans(this.threadObjectsToCalc.isAlive(), true);
+		return isNotEquals(this.threadCalc, null) && isEqualsBooleans(this.threadCalc.isAlive(), true)
+		&& isNotEquals(this.threadCalcSecondary, null) && isEqualsBooleans(this.threadCalcSecondary.isAlive(), true);
 	}
 	
 	/**
