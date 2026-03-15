@@ -101,7 +101,8 @@ public class ObjectMovable extends Object {
 		boolean isCalcEnterIntoScreen,
 		boolean isCalcEnterIntoCenterScreen,
 		boolean isCalcCollisionSelf,
-		boolean isCalcCollisionFromOthers
+		boolean isCalcCollisionFromOthers,
+		boolean isBlock
 	) {
 		super(
 			id, 
@@ -114,7 +115,8 @@ public class ObjectMovable extends Object {
 			isCalcEnterIntoScreen,
 			isCalcEnterIntoCenterScreen,
 			isCalcCollisionSelf,
-			isCalcCollisionFromOthers
+			isCalcCollisionFromOthers,
+			isBlock
 		);
 		this.construct();
 	}
@@ -452,18 +454,11 @@ public class ObjectMovable extends Object {
 	
 	private boolean isInCollisionToBlock(HashSet<Object> objectsInCollisions) {
 		boolean isInCollision = false;
-		int customsTypesBlocksLength = Object.customsTypesBlocks.length;
 		for (Object objectInCollision : objectsInCollisions) {
-			int objectCustomType = objectInCollision.getCustomType();
-			for (int i = 0; i < customsTypesBlocksLength; i++) {
-				int objectCustomTypeBlock = Object.customsTypesBlocks[i];
-				if (isEqualsInts(objectCustomType, objectCustomTypeBlock)) {
-					isInCollision = true;
-					break;
-				}
-			}
-			if (isEqualsBooleans(isInCollision, true))
+			if (isEqualsBooleans(objectInCollision.getIsBlock(), true)) {
+				isInCollision = true;
 				break;
+			}
 		}
 		return isInCollision;
 	}
